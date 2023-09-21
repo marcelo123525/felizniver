@@ -1,0 +1,21 @@
+import pandas as pd
+from datetime import date, datetime
+
+# Ler o arquivo CSV em um DataFrame
+df = pd.read_csv('cliente.csv')
+
+# Obtém a data de hoje
+hoje = date.today()
+
+# Função para enviar felicitações
+def enviar_felicitações(nome):
+    print(f"Parabéns, {nome}! Feliz aniversário!")
+
+# Iterar pelas linhas do DataFrame
+for index, row in df.iterrows():
+    nome = row['ID']
+    data_aniversario = datetime.strptime(row['Aniversario'], '%d/%m/%Y').date()
+
+    # Verifica se o aniversário é hoje
+    if data_aniversario.month == hoje.month and data_aniversario.day == hoje.day:
+        enviar_felicitações(nome)
